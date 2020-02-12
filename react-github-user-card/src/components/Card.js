@@ -5,7 +5,7 @@ function Card(props) {
     return(
        <div className="card">
            <img src={props.follower.avatar_url} alt="follower img"/>
-           <div class="cardInfo">
+           <div className="cardInfo">
                <h3>{props.follower.name}</h3>
                <h4>{props.follower.login}</h4>
                <p>{props.follower.location}</p>
