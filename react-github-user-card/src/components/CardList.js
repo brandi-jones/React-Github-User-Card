@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card.js";
+import UserCard from "./Card.js";
 import axios from "axios";
 
 function CardList(props) {
@@ -7,11 +7,11 @@ function CardList(props) {
     console.log("props.followers.length:", props.followers.length)
     return (
         <div className="cardList">
-            <h2>Followers:</h2>
+            <h2 className="followersText">Followers:</h2>
 
             {props.followers.map(user => {
                return(
-                <Card key={user.id} follower={user}/>
+                <UserCard className="followerCard" key={user.id} follower={user}/>
                 
                ) 
             })}

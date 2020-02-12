@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from "axios"
 import CardList from "./components/CardList.js";
-import Card from "./components/Card.js";
+import UserCard from "./components/Card.js";
 
 
 class App extends React.Component {
@@ -101,8 +101,13 @@ class App extends React.Component {
     console.log('rendering app...', this.state.followers)
     return (
       <>
-        <Card follower={this.state.user}/>
+      <div className="container">
+        <h1 className="followersText">My GitHub Followers</h1>
+        <UserCard follower={this.state.user}/>
+        
         <CardList followers={this.state.followers} />
+
+      </div>
     
       </>
     )
