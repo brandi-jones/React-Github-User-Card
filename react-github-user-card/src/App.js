@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from "axios"
+import CardList from "./components/CardList.js";
 
 class App extends React.Component {
 
@@ -16,11 +17,13 @@ class App extends React.Component {
   componentDidMount() {
     console.log("component mounted");
 
+
+    //update state
     axios.get('https://api.github.com/users/brandi-jones')
     .then(response => {
       console.log("componentDidMount response 1, brandi-jones:", response) 
       this.setState({
-        followers: getFollowers(response.data) //empty for now, set to getFollowers(response.data) later
+        followers: getFollowers(response.data) 
       })
     })
     .catch(error => {
@@ -36,22 +39,37 @@ class App extends React.Component {
       axios.get(followersUrl)
       .then(response => {
         console.log("componentDidMount response 2, followers:", response);
-        arrayFollowers = response;
+
+        response.data.forEach(follower => {
+          axios.get(follower.url)
+          .then(response => {
+            arrayFollowers.push(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        })
+
         console.log("arrayFollowers = ", arrayFollowers);
-        
-      });
+      })
+      .catch(error => {
+        console.log(error)
+      })
 
       return arrayFollowers;
     }
-
 
   }
 
 
 
   render() {
+    console.log('rendering app...', this.state.followers)
     return (
-      <div>hello test</div>
+      <>
+        <p>test</p>
+        <CardList followers={this.state.followers} />
+      </>
     )
   }
 
